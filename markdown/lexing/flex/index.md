@@ -21,11 +21,6 @@ fhmedia:
 ---
 
 
-# Flex: Lexer-Generator
-
-<!-- 15 Minuten: 5+1 Folien -->
-
-
 ## Motivation
 Lorem Ipsum. Starte mit H2-Level.
 ...
@@ -317,7 +312,7 @@ Zustand, wo zusätzlich alle unmarkierten Regeln aktiv sind. Der Zustand "`INITI
 
 
 
-::: notes
+
 <!-- DO NOT REMOVE - THIS IS A LAST SLIDE TO INDICATE THE LICENSE AND POSSIBLE EXCEPTIONS (IMAGES, ...). -->
 ::: slides
 
