@@ -19,6 +19,10 @@ tbd
 
 
 {{% challenges %}}
-## Bonus: Wuppie (2P)
-Erstellen Sie ...
+
+## Interpreter
+
+* Welche Sprachen kann man mit syntaxgesteuerten Interpretern verarbeiten?
+
+
 {{% /challenges %}}
