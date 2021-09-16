@@ -19,6 +19,12 @@ tbd
 
 
 {{% challenges %}}
-## Bonus: Wuppie (2P)
-Erstellen Sie ...
+
+## Symboltabellen
+
+*   Warum werden Symboltabellen eingesetzt?
+*   Warum muss man zwischen Deklaration und Definition unterscheiden?
+*   Erklären Sie die Verbindung einer Symboltabelle zu den einzelnen
+    Phasen einer Compiler-Pipeline.
+*   Wo liegen die Grenzen der semantischen Analyse?
 {{% /challenges %}}
