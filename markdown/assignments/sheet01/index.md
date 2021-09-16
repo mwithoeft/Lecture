@@ -19,6 +19,12 @@ tbd
 
 
 {{% challenges %}}
-## Bonus: Wuppie (2P)
-Erstellen Sie ...
+
+## Fehler-Recovery
+
+*   Erklären Sie, welche Fehler typischerweise beim Parsen auftreten können.
+*   Wie reagiert der von ANTLR4 generierte LL-Parser auf typische Fehler?
+*   Wie ist das Recovery-Verhalten bei einem Bison-Parser?
+*   Was sind "Fehlerproduktionen", wozu sind sie gut?
+
 {{% /challenges %}}
