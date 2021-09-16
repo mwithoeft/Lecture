@@ -19,6 +19,13 @@ tbd
 
 
 {{% challenges %}}
-## Bonus: Wuppie (2P)
-Erstellen Sie ...
+
+## Function Scopes
+
+*   Wieso sind Funktionen Scope und Symbol gleichzeitig?
+*   Skizzieren Sie für eine Funktionsdeklaration mit Parametern die resultierende
+    Symboltabelle.
+*   Erklären Sie, wie man beim Funktionsaufruf vorgehen würde. Werden dabei Einträge
+    in der Symboltabelle erzeugt?
+
 {{% /challenges %}}
