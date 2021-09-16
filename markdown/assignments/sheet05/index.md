@@ -19,6 +19,13 @@ tbd
 
 
 {{% challenges %}}
-## Bonus: Wuppie (2P)
-Erstellen Sie ...
+## Interpreter
+
+*   Was müssten Sie ändern, wenn Attribute bereits in der Klassendefinition angelegt werden sollen
+    (wie etwa in Java oder C++ üblich)?
+*   Erweitern Sie das vorgestellte Interpreterkonzept um Vererbung inkl. Polymorphie.
+    Wie würde sich statische und dynamische Polymorphie auf den Interpreter und
+    dessen Strukturen und Arbeitsweise auswirken?
+
+
 {{% /challenges %}}
