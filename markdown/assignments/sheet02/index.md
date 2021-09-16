@@ -19,6 +19,11 @@ tbd
 
 
 {{% challenges %}}
-## Bonus: Wuppie (2P)
-Erstellen Sie ...
+
+## Symboltabellen
+
+*   Warum kann man im Allgemeinen nicht die Symboltabellen nutzen, um die Werte von Symbolen mit zu speichern?
+*   Es gibt Sprachen, in denen Identifier case-insensitive sind. Wie wirkt sich das auf die Symboltabellen aus?
+
+
 {{% /challenges %}}
