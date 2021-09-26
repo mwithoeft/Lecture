@@ -8,7 +8,7 @@ quizzes:
   - link: XYZ
     name: "Testquizz (URL from `'`{=markdown}Invite more Players`'`{=markdown})"
 assignments:
-  - topic: blatt01
+  - topic: blatt05
 youtube:
   - id: XYZ (ID)
   - link: https://youtu.be/XYZ

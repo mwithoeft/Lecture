@@ -19,6 +19,9 @@ tbd
 
 
 {{% challenges %}}
-## Bonus: Wuppie (2P)
-Erstellen Sie ...
+## LLVM IR
+*   Wie  sehen Schleifen in LLVM IR aus?
+*   Mit welchen Befehlen kann man LLVM IR in welche Maschinensprache übersetzen?
+*   Wie konfiguriert man verschiedene Optimierungsläufe in LLVM IR?
+*   Finden Sie besonders zeitintensive Optimierungen.
 {{% /challenges %}}
