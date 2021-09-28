@@ -22,13 +22,6 @@ attachments:
 ---
 
 
-# Wiederholung
-
-## Folie: Frage
-Lorem Ipsum.
-
-
-
 # Motivation
 
 Es ist ein neuer Prozessor entwickelt worden mit einem neuen Befehlssatz, und es sollen für zwei Programmiersprachen Compiler entwickelt werden.
