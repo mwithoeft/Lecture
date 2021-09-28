@@ -37,7 +37,7 @@ Was tun?
 
 ## Themen für heute: Letzte Phase in Compiler-Pipeline
 
-![Compiler-Pipeline](images/architektur_cb)
+![Compiler-Pipeline](images/architektur_cb.png)\
 
 
 
