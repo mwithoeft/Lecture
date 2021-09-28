@@ -19,6 +19,9 @@ tbd
 
 
 {{% challenges %}}
-## Bonus: Wuppie (2P)
-Erstellen Sie ...
+## Optimierungen
+*   Welche Optimierungen finden typischerweise auf dem AST statt?
+*   Was ist "Peephole-Optimierung"? Welche Varianten kennen Sie und wozu dienen sie?
+*   Welche Probleme stellen sich bei der Register-Zuweisung? Wie kann man das algorithmisch umsetzen?
+*   Wie kann man durch Optimierungen Energieeinsparungen erreichen?
 {{% /challenges %}}
