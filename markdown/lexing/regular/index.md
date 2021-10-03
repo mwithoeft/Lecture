@@ -15,30 +15,17 @@ quizzes:
     name: "Testquizz (URL from `'`{=markdown}Invite more Players`'`{=markdown})"
 assignments:
   - topic: blatt01
-youtube:
-  - id: XYZ (ID)
-  - link: https://youtu.be/XYZ
-    name: "Use This As Link Text (Link from `'share'`{=markdown}-Button)"
-fhmedia:
-  - link: https://www.fh-bielefeld.de/medienportal/m/XYZ
-    name: "Use This As Link Text (Direkt-Link from `'share'`{=markdown}-Button)"
+
 attachments:
   - link: https://www.fh-bielefeld.de
     name: "Extra Material, e.g. annotated slides `...`{=markdown} Use This As Link Text"
 ---
 
 
-# Wiederholung
-
-## Folie: Frage
-Lorem Ipsum.
-
-
 
 # Motivation
 
-## Folie: Idee/Problem
-Lorem Ipsum.
+## Was muss ein Compiler wohl als erstes tun?
 
 ## Themen für heute
 - Endliche Automaten
@@ -141,7 +128,10 @@ Gegeben: Ein NFA $A = (Q, \Sigma, \delta, q_0, F)$
 
 Wir konstruieren einen DFA $A' =  (Q', \Sigma, \delta ', q_0, F')$ wie folgt:
 
+\bigskip
+
 ![Konvertierung NFA in DFA](images/nfa2dfa.png)
+
 
 
 ## Beispiel
@@ -165,7 +155,7 @@ $\rightarrow$ $\{q_0\}$ | $\{q_0\}$      | $\{q_1,q_2\}$
 
 Ist ist der DFA $A$ nicht vollständig, wird ein Fehlerzustand $q_e$, der kein Endzustand ist, hinzugefügt und in alle leeren Tabellenfelder eingetragen.
 
-Generiere eine untere Dreieckstabelle D, die am Anfang leer ist.
+Dann wird eine Matrix generiert, die für alle Zustandspaare sagt, ob die beiden Zustände zu einem verschmelzen können.
 
 ![DFA Minimierung](images/minimize_dfa.png)
 
@@ -264,7 +254,10 @@ $\alpha A \beta \Rightarrow \alpha \gamma \beta$ ($\alpha A \beta$ leitet $\alph
 Sei $L$ eine reguläre Sprache.
 
 $\Rightarrow \exists$ Konstante $n \in \mathbb{N}$:
-$\underset{\underset{|w| \geq n} {w \in L}}\forall \exists x, y, z \in \Sigma^{*}$ mit $w = xyz, y \neq \epsilon, |xy| \leq n, \underset{k \geq 0} \forall xy^{k}z \in L$}
+
+$\underset{\underset{|w| \geq n} {w \in L}}\forall \exists x, y, z \in \Sigma^{*}$ mit $w = xyz, y \neq \epsilon, |xy| \leq n:$
+
+$\underset{k \geq 0} \forall xy^{k}z \in L$
 
 
 ## Abschlusseigenschaften regulärer Sprachen
@@ -302,9 +295,10 @@ Im Compilerbau werden reguläre Ausdrücke benutzt, um die Schlüsselwörter und
 Was ist zu beachten:
 
 *   Man braucht mindestens eine Liste von Paaren aus regulären Ausdrücken und Tokennamen.
-*   Neben den Schlüsselwörtern und Symbolen wie (,), *, $ldots$ müssen auch Namen für Variablen, Funktionen, Klassen, Methoden, $\ldots$ (sog. Identifier) erkannt werden
+*   Neben den Schlüsselwörtern und Symbolen wie (,), *, $\ldots$ müssen auch Namen für Variablen, Funktionen, Klassen, Methoden, $\ldots$ (sog. Identifier) erkannt werden
 *   Namen haben meist eine gewisse Struktur, die sich mit regulären Ausdrücken beschreiben lassen.
 *   Erlaubte Token sind in der Grammatik des Parsers beschrieben, d. h. für literale Namen, Strings, Zahlen liefert der Scanner  zwei Werte:
+
 	*  z. B. <ID, "radius">, <Integerzahl, 558>
 *   Kommentare und Strings müssen richtig erkannt werden. (Schachtelungen)
 
@@ -338,6 +332,4 @@ Man kann natürlich auch einen Lexer selbst programmieren, d. h. die DFAs für d
 
 Unless otherwise noted, this work is licensed under CC BY-SA 4.0.
 
-### Exceptions
-*   TODO (what, where, license)
 :::
