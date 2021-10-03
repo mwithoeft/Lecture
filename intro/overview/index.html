@@ -1,0 +1,1915 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.87.0" />
+    <meta name="description" content="">
+<meta name="author" content="cagix">
+
+    <link rel="icon" href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/images/favicon.png" type="image/png">
+
+    <title>Struktur eines Compilers   </title>
+
+    
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/nucleus.css?1633278362" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/fontawesome-all.min.css?1633278362" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/hybrid.css?1633278362" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/featherlight.min.css?1633278362" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/perfect-scrollbar.min.css?1633278362" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/auto-complete.css?1633278362" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/atom-one-dark-reasonable.css?1633278362" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/theme.css?1633278362" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/tabs.css?1633278362" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/hugo-theme.css?1633278362" rel="stylesheet">
+    
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/css/theme-green.css?1633278362" rel="stylesheet">
+    
+    
+
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/jquery-3.3.1.min.js?1633278362"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+        :not(pre) > code + span.copy-to-clipboard {
+            display: none;
+        }
+      
+    </style>
+    <style type="text/css">
+
+ 
+.center {
+    align-content: center;
+    text-align: center;
+    margin: auto;
+}
+.alert {
+    color: #ff3333;
+}
+.bsp {
+    padding: 0.05cm;
+    border-width: 0.05cm;
+    border-style: solid;
+    border-color: #ddd;
+    background-color: #ddd;
+    border-radius: 25px;
+    float: right;
+}
+.cbox {
+    padding: 0.2cm;
+    border-width: 0.1cm;
+    border-style: solid;
+    border-color: #4070a0;
+    background-color: #f2f2f2;
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    overflow: auto;
+}
+.blueArrow {
+    color: #4070a0;
+    font-family: "Courier New", "Courier", monospace;
+    font-weight: bold;
+}
+.origin {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+.showme {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+
+
+ 
+.tldr {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.recap {
+    
+    
+   margin: 4px 0px 26px 0px;
+}
+.bib {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.outcomes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.quizzes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.challenges {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.assignments {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+h1.tldr, h1.recap, h1.bib, h1.outcomes, h1.quizzes, h1.challenges, h1.assignments {
+    padding: 0px;
+}
+
+
+ 
+.noJsAlert {
+    padding: 20px;
+    background-color: #f44336;  
+    color: white;
+    margin-bottom: 15px;
+}
+
+
+ 
+.embed-video-player {
+    position: relative;
+    padding-bottom: 56%;
+    height: 0;
+    overflow: hidden;
+}
+.youtube-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border:0;
+}
+
+
+ 
+#header-wrapper {
+    padding:0.6rem;
+}
+
+
+ 
+#chapter p {
+    text-align: left;
+}
+
+
+ 
+figcaption h4 {
+    margin-top:-2.5rem;
+}
+.border1 {
+    border:1px solid black;
+}
+
+ 
+td ul, td ol {
+    margin: 0 0 1rem 0.5rem;
+    padding: 0 0 0 0.5rem;
+}
+
+ 
+h1 { font-size:2.8rem !important;}
+h2 { font-size:2.2rem; margin:1.2rem 0}
+h3 { font-size:1.9rem; text-align:left !important; font-weight:400 !important;}
+h4 { font-size:1.6rem}
+h5 { font-size:1.3rem}
+h6 { font-size:1rem}
+
+h2 {
+    width:100% !important;
+    border-bottom:1px solid #5e5e5e !important;
+    padding-bottom: 2px;
+}
+.tldr h2, .recap h2, .bib h2, .outcomes h2, .quizzes h2, .challenges h2, .assignments h2 {
+    margin:0.5rem 0
+}
+
+</style>
+
+  </head>
+  <body class="" data-url="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/overview/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href='https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/'>
+    <img style="max-width:35%" alt="icon" src='/elearning/data/FH-Bielefeld/lm_data/lm_1165993/images/logo.png'>
+</a>
+
+    </div>
+    
+  </div>
+  
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/" title="Überblick" class="dd-item
+        parent
+        
+        
+        ">
+      <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/">
+          Überblick
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/overview/" title="Struktur eines Compilers" class="dd-item active">
+        <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/overview/">
+        Struktur eines Compilers
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/languages/" title="Bandbreite der Programmiersprachen" class="dd-item ">
+        <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/languages/">
+        Programmiersprachen
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/applications/" title="Anwendungen" class="dd-item ">
+        <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/applications/">
+        Anwendungen
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/" title="Lexer" class="dd-item
+        
+        
+        
+        ">
+      <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/">
+          Lexer
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/regular/" title="Reguläre Sprachen, Ausdrucksstärke" class="dd-item ">
+        <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/regular/">
+        Reguläre Sprachen
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/implementation/" title="Lexer: Implementierungen" class="dd-item ">
+        <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/implementation/">
+        Lexer: Implementierungen
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/flex/" title="Flex: Lexer generieren" class="dd-item ">
+        <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/lexing/flex/">
+        Flex: Lexer generieren
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/" title="Parser" class="dd-item
+        
+        
+        
+        ">
+      <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/">
+          Parser
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/cfg/" title="CFG, LL-Parser" class="dd-item ">
+        <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/cfg/">
+        CFG, LL-Parser
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/ll-parser/" title="LL-Parser selbst implementiert" class="dd-item ">
+        <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/ll-parser/">
+        LL-Parser implementieren
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/ll-advanced/" title="LL-Parser: Fortgeschrittene Techniken" class="dd-item ">
+        <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/ll-advanced/">
+        LL: Fortgeschrittene Techniken
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/antlr/" title="ANTLR (Parsergenerator)" class="dd-item
+        
+        
+        
+        ">
+      <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/antlr/">
+          ANTLR (Parsergenerator)
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/lr-part/" title="Syntaxanalyse: LR-Parser" class="dd-item ">
+        <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/lr-part/">
+        LR-Parser
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/bison/" title="Bison (Parsergenerator)" class="dd-item
+        
+        
+        
+        ">
+      <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/bison/">
+          Bison (Parsergenerator)
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/parsercombinator/" title="PEG-Parser, Pratt-Parser und Parser Combinators" class="dd-item
+        
+        
+        
+        ">
+      <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/parsercombinator/">
+          PEG-Parser, Pratt-Parser und Parser Combinators
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/recovery/" title="Error-Recovery" class="dd-item ">
+        <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/recovery/">
+        Error-Recovery
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/finalwords/" title="Grenze Lexer und Parser" class="dd-item ">
+        <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/parsing/finalwords/">
+        Grenze Lexer und Parser
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/" title="Semantische Analyse" class="dd-item
+        
+        
+        
+        ">
+      <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/">
+          Semantische Analyse
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/" title="Symboltabellen" class="dd-item
+        
+        
+        
+        ">
+      <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/">
+          Symboltabellen
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/intro/" title="Semantische Analyse: Symboltabellen" class="dd-item ">
+        <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/intro/">
+        Überblick Symboltabellen
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/scopes/" title="Nested Scopes" class="dd-item ">
+        <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/scopes/">
+        Nested Scopes
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/functions/" title="Funktionen" class="dd-item ">
+        <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/functions/">
+        Funktionen
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/classes/" title="Strukturen und Klassen" class="dd-item ">
+        <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/symboltables/classes/">
+        Strukturen und Klassen
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/attribgrammars/" title="Attributierte Grammatiken" class="dd-item ">
+        <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/attribgrammars/">
+        Attributierte Grammatiken
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/types/" title="Typen und Type Checking" class="dd-item ">
+        <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/semantics/types/">
+        Typen und Type Checking
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/" title="Zwischencode" class="dd-item
+        
+        
+        
+        ">
+      <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/">
+          Zwischencode
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/intro/" title="Überblick Zwischencode" class="dd-item ">
+        <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/intro/">
+        Überblick Zwischencode
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/llvm-ir/" title="LLVM als IR" class="dd-item
+        
+        
+        
+        ">
+      <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intermediate/llvm-ir/">
+          LLVM als IR
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/" title="Interpreter" class="dd-item
+        
+        
+        
+        ">
+      <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/">
+          Interpreter
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/syntaxdriven/" title="Syntaxgesteuerte Interpreter" class="dd-item ">
+        <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/syntaxdriven/">
+        Syntaxgesteuerte Interpreter
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/astdriven-part1/" title="AST-basierte Interpreter: Basics" class="dd-item ">
+        <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/astdriven-part1/">
+        AST-basierte Interpreter 1
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/astdriven-part2/" title="AST-basierte Interpreter: Funktionen und Klassen" class="dd-item ">
+        <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/astdriven-part2/">
+        AST-basierte Interpreter 2
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/vm/" title="Bytecode und Virtuelle Maschinen" class="dd-item
+        
+        
+        
+        ">
+      <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/vm/">
+          Bytecode/VM
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/gc/" title="Garbage Collection" class="dd-item
+        
+        
+        
+        ">
+      <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/interpretation/gc/">
+          Garbage Collection
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/maschinecode/" title="Generierung von Maschinencode" class="dd-item
+        
+        
+        
+        ">
+      <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/maschinecode/">
+          Maschinencode
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+  
+ 
+
+          
+        
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li>
+                  <a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/misc/schedule"><i class='fas fa-bookmark'></i> Fahrplan</a>
+              </li>
+          
+              <li>
+                  <a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/assignments"><i class='fas fa-bookmark'></i> Praktikum</a>
+              </li>
+          
+              <li>
+                  <a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/misc/grading"><i class='fas fa-bookmark'></i> Note/Credits</a>
+              </li>
+          
+              <li>
+                  <a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/misc/syllabus"><i class='fas fa-bookmark'></i> Syllabus</a>
+              </li>
+          
+              <li>
+                  <a class="padding" href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/misc/resources"><i class='fas fa-bookmark'></i> Ressourcen</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <p>
+    <a href='/elearning/data/FH-Bielefeld/lm_data/lm_1165993/misc/imprint'>Impressum</a>,
+    <a href='/elearning/data/FH-Bielefeld/lm_data/lm_1165993/misc/privacy'>Datenschutz</a>,
+    <a href='/elearning/data/FH-Bielefeld/lm_data/lm_1165993/misc/credits'>Credits</a>
+</p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                  
+                  
+                  
+                  <div id="top-github-link">
+                    <a class="github-link" title='Edit this page' href="https://github.com/Compilerbau/Lecture/edit/master/markdown/intro/overview/index.md" target="blank">
+                      <i class="fas fa-code-branch"></i>
+                      <span id="top-github-link-text">Edit this page</span>
+                    </a>
+                  </div>
+                  
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/elearning/data/FH-Bielefeld/lm_data/lm_1165993/'>CB W21</a> > <a href='/elearning/data/FH-Bielefeld/lm_data/lm_1165993/intro/'>Überblick</a> > Struktur eines Compilers
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#sprachen-verstehen-texte-transformieren">Sprachen verstehen, Texte transformieren</a></li>
+        <li><a href="#compiler-big-picture">Compiler: Big Picture</a>
+          <ul>
+            <li><a href="#frontend-analyse">Frontend, Analyse</a></li>
+            <li><a href="#backend-synthese">Backend, Synthese</a></li>
+            <li><a href="#weitere-begriffe">Weitere Begriffe</a></li>
+          </ul>
+        </li>
+        <li><a href="#lexikalische-analyse-wörter-token-erkennen">Lexikalische Analyse: Wörter (&quot;<em>Token</em>&quot;) erkennen</a></li>
+        <li><a href="#syntaxanalyse-sätze-erkennen">Syntaxanalyse: Sätze erkennen</a></li>
+        <li><a href="#vorschau-parser-implementieren">Vorschau: Parser implementieren</a></li>
+        <li><a href="#semantische-analyse-bedeutung-erkennen">Semantische Analyse: Bedeutung erkennen</a></li>
+        <li><a href="#zwischencode-generieren">Zwischencode generieren</a></li>
+        <li><a href="#code-optimieren">Code optimieren</a></li>
+        <li><a href="#code-generieren">Code generieren</a></li>
+        <li><a href="#probleme">Probleme</a></li>
+        <li><a href="#wrap-up">Wrap-Up</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Struktur eines Compilers
+            </h1>
+          
+
+        
+
+
+
+
+    
+
+
+
+
+
+<div class="tldr">
+    <h2>TL;DR</h2>
+
+    
+        <p>Compiler übersetzen (formalen) Text in ein anderes Format.</p>
+<p>Typischerweise kann man diesen Prozess in verschiedene Stufen/Phasen einteilen. Dabei
+verarbeitet jede Phase den Output der vorangegangenen Phase und erzeugt ein (kompakteres)
+Ergebnis, welches an die nächste Phase weitergereicht wird. Dabei nimmt die Abstraktion
+von Stufe zu Stufe zu: Der ursprüngliche Input ist ein Strom von Zeichen, daraus wird ein
+Strom von Wörtern (Token), daraus ein Baum (Parse Tree), Zwischencode (IC), &hellip;</p>
+<p><img src="images/architektur_cb.png" alt=""></p>
+<p>Die gezeigten Phasen werden traditionell unterschieden. Je nach Aufgabe können verschiedene
+Stufen zusammengefasst werden oder sogar gar nicht auftreten.</p>
+
+    
+
+    
+        <h3>Videos (YouTube)</h3>
+        
+
+<ul>
+
+    
+    
+
+    
+        
+        
+        <div class="embed-video-player">
+            <iframe class="youtube-player" src="https://www.youtube-nocookie.com/embed/zpELDC_3G7Q" title="YouTube video player" allowfullscreen></iframe>
+        </div>
+    
+
+    
+    
+
+</ul>
+
+    
+
+    
+        <h3>Videos (FH-Medienportal)</h3>
+        
+
+<ul>
+
+    
+    
+        
+    
+
+    
+    
+    
+        
+    
+
+    
+        <li><a href="https://www.fh-bielefeld.de/medienportal/m/ec65309e6ba36d1d63e1aa8523f1f06b96af927d88c547083f1960ebf716e9d121701813bc1972dcf83779a007a62f839bf97f19bff3abc22c60dae523be7c0e" target="_blank" rel="nofollow noopener noreferrer">Direktlink FH-Medienportal: CB Überblick</a></li>
+    
+
+</ul>
+
+    
+
+    
+</div>
+
+
+    
+
+
+<div class="outcomes">
+    <h2>Lernziele</h2>
+    
+        <h3>Verstehen (K2)</h3>
+<ul>
+<li>Struktur eines Compilers: Phasen und deren Aufgaben</li>
+</ul>
+
+    
+</div>
+
+
+    <h2 id="sprachen-verstehen-texte-transformieren">Sprachen verstehen, Texte transformieren</h2>
+<blockquote>
+<p>The cat runs quickly.</p>
+</blockquote>
+<p>=&gt; Struktur? Bedeutung?</p>
+<p>Wir können hier (mit steigender Abstraktionsstufe) unterscheiden:</p>
+<ul>
+<li>
+<p>Sequenz von Zeichen</p>
+</li>
+<li>
+<p>Wörter: Zeichenketten mit bestimmten Buchstaben, getrennt durch bestimmte
+andere Zeichen; Wörter könnten im Wörterbuch nachgeschlagen werden</p>
+</li>
+<li>
+<p>Sätze: Anordnung von Wörtern nach einer bestimmten Grammatik, Grenze: Satzzeichen</p>
+<p>Hier (vereinfacht): Ein Satz besteht aus Subjekt und Prädikat. Das Subjekt
+besteht aus einem oder keinen Artikel und einem Substantiv. Das Prädikat
+besteht aus einem Verb und einem oder keinem Adverb.</p>
+</li>
+<li>
+<p>Sprache: Die Menge der in einer Grammatik erlaubten Sätze</p>
+</li>
+</ul>
+<h2 id="compiler-big-picture">Compiler: Big Picture</h2>
+<div class="center" style="width:auto;height:auto;"><figure><img src="https://raw.githubusercontent.com/munificent/craftinginterpreters/master/site/image/a-map-of-the-territory/mountain.png" alt=""><figcaption><h4></h4></figcaption></figure></div>
+<p><span class='origin'>Quelle: <a href="https://github.com/munificent/craftinginterpreters/blob/master/site/image/a-map-of-the-territory/mountain.png">&quot;A Map of the Territory (mountain.png)&quot;</a> by <a href="https://github.com/munificent">Bob Nystrom</a>, licensed under <a href="https://github.com/munificent/craftinginterpreters/blob/master/LICENSE">MIT</a></span></p>
+<p><strong>Begriffe und Phasen</strong></p>
+<p>Die obige Bergsteige-Metapher kann man in ein nüchternes Ablaufdiagramm mit verschiedenen
+Stufen und den zwischen den Stufen ausgetauschten Artefakten übersetzen:</p>
+<div class="center" style="width:80%;height:auto;"><figure><img src="images/architektur_cb.png" alt=""><figcaption><h4></h4></figcaption></figure></div>
+<h3 id="frontend-analyse">Frontend, Analyse</h3>
+<p>Die ersten Stufen eines Compilers, die mit der <strong>Analyse</strong> des
+Inputs beschäftigt sind. Dies sind in der Regel der Scanner, der
+Parser und die semantische Analyse.</p>
+<ul>
+<li>
+<p>Scanner, Lexer, Tokenizer, Lexikalische Analyse</p>
+<p>Zerteilt den Zeichenstrom in eine Folge von Wörtern. Mit regulären
+Ausdrücken kann definiert werden, was Klassen gültiger Wörter (&quot;Token&quot;)
+sind. Ein Token hat i.d.R. einen Namen und einen Wert.</p>
+</li>
+<li>
+<p>Parser, Syntaxanalyse</p>
+<p>Der Parser erhält als Eingabe die Folge der Token und versucht mit
+Hilfe einer Grammatik zu bestimmen, ob es sich bei der Tokensequenz
+um gültige Sätze im Sinne der Grammatik handelt. Hier gibt es viele
+Algorithmen, die im Wesentlichen in die Klassen &quot;top-down&quot; und &quot;bottom-up&quot;
+fallen.</p>
+</li>
+<li>
+<p>Semantische Analyse, Kontexthandling</p>
+<p>In den vorigen Stufen wurde eher lokal gearbeitet. Hier wird über den
+gesamten Baum und die Symboltabelle hinweg geprüft, ob beispielsweise
+Typen korrekt verwendet wurden, in welchen Scope ein Name gehört etc.
+Mit diesen Informationen wird der AST angereichert.</p>
+</li>
+<li>
+<p>Symboltabellen</p>
+<p>Datenstrukturen, um Namen, Werte, Scopes und weitere Informationen zu
+speichern. Die Symboltabellen werden vor allem beim Parsen befüllt und
+bei der semantischen Analyse gelesen, aber auch der Lexer benötigt u.U.
+diese Informationen.</p>
+</li>
+</ul>
+<h3 id="backend-synthese">Backend, Synthese</h3>
+<p>Die hinteren Stufen eines Compilers, die mit der <strong>Synthese</strong> der
+Ausgabe beschäftigt sind. Dies sind in der Regel verschiedene
+Optimierungen und letztlich die Code-Generierung</p>
+<ul>
+<li>
+<p>Codegenerierung</p>
+<p>Erzeugung des Zielprogramms aus der (optimierten) Zwischendarstellung.
+Dies ist oft Maschinencode, kann aber auch C-Code oder eine andere
+Ziel-Sprache sein.</p>
+</li>
+<li>
+<p>Optimierung</p>
+<p>Diverse Maßnahmen, um den resultierenden Code kleiner und/oder schneller
+zu gestalten.</p>
+</li>
+<li>
+<p>Symboltabellen</p>
+<p>Datenstrukturen, um Namen, Werte, Scopes und weitere Informationen zu
+speichern. Die Symboltabellen werden vor allem beim Parsen befüllt und
+bei der semantischen Analyse gelesen, aber auch der Lexer benötigt u.U.
+diese Informationen.</p>
+</li>
+</ul>
+<h3 id="weitere-begriffe">Weitere Begriffe</h3>
+<ul>
+<li>
+<p>Parse Tree, Concrete Syntax Tree</p>
+<p>Repräsentiert die Struktur eines Satzes, wobei jeder Knoten dem Namen einer
+Regel der Grammatik entspricht. Die Blätter bestehen aus den Token samt
+ihren Werten.</p>
+</li>
+<li>
+<p>AST, (Abstract) Syntax Tree</p>
+<p>Vereinfachte Form des Parse Tree, wobei der Bezug auf die Element der
+Grammatik (mehr oder weniger) weggelassen wird.</p>
+</li>
+<li>
+<p>Annotierter AST</p>
+<p>Anmerkungen am AST, die für spätere Verarbeitungsstufen interessant
+sein könnten: Typ-Informationen, Optimierungsinformationen, ...</p>
+</li>
+<li>
+<p>Zwischen-Code, IC</p>
+<p>Zwischensprache, die abstrakter ist als die dem AST zugrunde liegenden
+Konstrukte der Ausgangssprache. Beispielsweise könnten <code>while</code>-Schleifen
+durch entsprechende Label und Sprünge ersetzt werden. Wie genau dieser
+Zwischen-Code aussieht, muss der Compilerdesigner entscheiden. Oft findet
+man den Assembler-ähnlichen &quot;3-Adressen-Code&quot;.</p>
+</li>
+<li>
+<p>Sprache</p>
+<p>Eine Sprache ist eine Menge gültiger Sätze. Die Sätze werden aus
+Wörtern gebildet, diese wiederum aus Zeichenfolgen.</p>
+</li>
+<li>
+<p>Grammatik</p>
+<p>Eine Grammatik beschreibt formal die Syntaxregeln für eine
+Sprache. Jede Regel in der Grammatik beschreibt dabei die Struktur eines
+Satzes oder einer Phrase.</p>
+</li>
+</ul>
+<h2 id="lexikalische-analyse-wörter-token-erkennen">Lexikalische Analyse: Wörter (&quot;<em>Token</em>&quot;) erkennen</h2>
+<p>Die lexikalische Analyse (auch <em>Scanner</em> oder <em>Lexer</em> oder <em>Tokenizer</em> genannt)
+zerteilt den Zeichenstrom in eine Folge von Wörtern (&quot;<em>Token</em>&quot;). Die geschieht
+i.d.R. mit Hilfe von <em>regulären Ausdrücken</em>.</p>
+<p>Dabei müssen unsinnige/nicht erlaubte Wörter erkannt werden.</p>
+<p>Überflüssige Zeichen (etwa Leerzeichen) werden i.d.R. entfernt.</p>
+<pre><code>sp = 100;
+
+&lt;ID, sp&gt;, &lt;OP, =&gt;, &lt;INT, 100&gt;, &lt;SEM&gt;
+</code></pre>
+<p><em>Anmerkung</em>: In der obigen Darstellung werden die Werte der Token (&quot;<em>Lexeme</em>&quot;)
+zusammen mit den Token &quot;gespeichert&quot;. Alternativ können die Werte der Token
+auch direkt in der Symboltabelle gespeichert werden und in den Token nur der
+Verweis auf den jeweiligen Eintrag in der Tabelle.</p>
+<h2 id="syntaxanalyse-sätze-erkennen">Syntaxanalyse: Sätze erkennen</h2>
+<p>In der Syntaxanalyse (auch <em>Parser</em> genannt) wird die Tokensequenz
+in gültige Sätze unterteilt. Dazu werden in der Regel <em>kontextfreie
+Grammatiken</em> und unterschiedliche Parsing-Methoden (<em>top-down</em>, <em>bottom-up</em>)
+genutzt.</p>
+<p>Dabei müssen nicht erlaubte Sätze erkannt werden.</p>
+<pre><code>&lt;ID, sp&gt;, &lt;OP, =&gt;, &lt;INT, 100&gt;, &lt;SEM&gt;
+</code></pre>
+<pre><code class="language-lex" data-lang="lex">statement : assign SEM ;
+assign : ID OP INT ;
+</code></pre><pre><code>                   statement                  =
+                   /       \                 / \
+               assign      SEM             sp  100
+             /   |   \      |
+           ID    OP  INT    ;
+           |     |    |
+           sp    =   100
+</code></pre>
+<p>Mit Hilfe der Produktionsregeln der Grammatik wird versucht, die Tokensequenz
+zu erzeugen. Wenn dies gelingt, ist der Satz (also die Tokensequenz) ein
+gültiger Satz im Sinne der Grammatik. Dabei sind die Token aus der lexikalischen
+Analyse die hier betrachteten Wörter!</p>
+<p>Dabei entsteht ein sogenannter <em>Parse-Tree</em> (oder auch &quot;<em>Syntax Tree</em>&quot;; in der
+obigen Darstellung der linke Baum). In diesen Bäumen spiegeln sich die Regeln
+der Grammatik wider, d.h. zu einem Satz kann es durchaus verschiedene
+Parse-Trees geben.</p>
+<p>Beim <em>AST</em> (&quot;<em>Abstract Syntax Tree</em>&quot;) werden die Knoten um alle später nicht
+mehr benötigten Informationen bereinigt (in der obigen Darstellung der rechte
+Baum).</p>
+<p><em>Anmerkung</em>: Die Begriffe werden oft nicht eindeutig verwendet. Je nach
+Anwendung ist das Ergebnis des Parsers ein AST oder ein Parse-Tree.</p>
+<p><em>Anmerkung</em>: Man könnte statt <code>OP</code> auch etwa ein <code>ASSIGN</code> nutzen und müsste
+dann das &quot;<code>=</code>&quot; nicht extra als Inhalt speichern, d.h. man würde die Information
+im Token-Typ kodieren.</p>
+<h2 id="vorschau-parser-implementieren">Vorschau: Parser implementieren</h2>
+<pre><code class="language-lex" data-lang="lex">stat : assign | ifstat | ... ;
+assign : ID '=' expr ';' ;
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">stat</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">switch</span> <span style="color:#f92672">(&lt;&lt;</span>current token<span style="color:#f92672">&gt;&gt;)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">case</span> ID <span style="color:#f92672">:</span> assign<span style="color:#f92672">();</span> <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">case</span> IF <span style="color:#f92672">:</span> ifstat<span style="color:#f92672">();</span> <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">...</span>
+        <span style="color:#66d9ef">default</span> <span style="color:#f92672">:</span> <span style="color:#f92672">&lt;&lt;</span>raise exception<span style="color:#f92672">&gt;&gt;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">assign</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    match<span style="color:#f92672">(</span>ID<span style="color:#f92672">);</span>
+    match<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;=&#39;</span><span style="color:#f92672">);</span>
+    expr<span style="color:#f92672">();</span>
+    match<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;;&#39;</span><span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>Der gezeigte Parser ist ein sogenannter &quot;LL(1)&quot;-Parser und geht von oben nach unten
+vor, d.h. ist ein Top-Down-Parser.</p>
+<p>Nach dem Betrachten des aktuellen Tokens wird entschieden, welche Alternative
+vorliegt und in die jeweilige Methode gesprungen.</p>
+<p>Die <code>match()</code>-Methode entspricht dabei dem Erzeugen von Blättern, d.h. hier
+werden letztlich die Token der Grammatik erkannt.</p>
+<h2 id="semantische-analyse-bedeutung-erkennen">Semantische Analyse: Bedeutung erkennen</h2>
+<p>In der semantischen Analyse (auch <em>Context Handling</em> genannt) wird der AST
+zusammen mit der Symboltabelle geprüft. Dabei spielen Probleme wie Scopes,
+Namen und Typen eine wichtige Rolle.</p>
+<p>Die semantische Analyse ist direkt vom Programmierparadigma der zu
+übersetzenden Sprache abhängig, d.h. müssen wir beispielsweise das Konzept
+von Klassen verstehen?</p>
+<p>Als Ergebnis dieser Phase entsteht typischerweise ein <em>annotierter AST</em>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">{
+    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">42</span>;
+    {
+        <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">7</span>;
+        x <span style="color:#f92672">+=</span> <span style="color:#ae81ff">3</span>;    <span style="color:#75715e">// ???
+</span><span style="color:#75715e"></span>    }
+}
+</code></pre></div><pre><code>                                              = {type: real, loc: tmp1}
+sp = 100;                                    / \
+                                            /   \
+                                          sp     inttofloat
+                                  {type: real,       |
+                                   loc: var b}      100
+</code></pre>
+<h2 id="zwischencode-generieren">Zwischencode generieren</h2>
+<p>Aus dem annotierten AST wird in der Regel ein Zwischencode (&quot;<em>Intermediate Code</em>&quot;,
+auch &quot;IC&quot;) generiert. oft findet man hier den Assembler-ähnlichen &quot;3-Adressen-Code&quot;,
+in manchen Compilern wird als IC aber auch der AST selbst genutzt.</p>
+<pre><code>                 = {type: real, loc: tmp1}
+                / \
+               /   \
+             sp     inttofloat
+     {type: real,       |
+      loc: var b}      100
+</code></pre>
+<p>=&gt; <code>t1 = inttofloat(100)</code></p>
+<h2 id="code-optimieren">Code optimieren</h2>
+<p>An dieser Stelle verlassen wir das Compiler-Frontend und begeben uns in das
+sogenannte <em>Backend</em>. Die Optimierung des Codes kann sehr unterschiedlich
+ausfallen, beispielsweise kann man den Zwischencode selbst optimieren, dann
+nach sogenanntem &quot;Targetcode&quot; übersetzen und diesen weiter optimieren, bevor
+das Ergebnis im letzten Schritt in Maschinencode übersetzt wird.</p>
+<p>Die Optimierungsphase ist sehr stark abhängig von der Zielhardware. Hier kommen
+fortgeschrittene Mengen- und Graphalgorithmen zur Anwendung. Die Optimierung
+stellt den wichtigsten Teil aktueller Compiler dar.</p>
+<p>Aus zeitlichen und didaktischen Gründen werden wir in dieser Veranstaltung den
+Fokus auf die Frontend-Phasen legen und die Optimierung nur grob streifen.</p>
+<p><code>t1 = inttofloat(100)</code> =&gt; <code>t1 = 100.0</code></p>
+<p><code>x = y*0;</code> =&gt; <code>x = 0;</code></p>
+<h2 id="code-generieren">Code generieren</h2>
+<ul>
+<li>
+<p>Maschinencode:</p>
+<pre><code class="language-gnuassembler" data-lang="gnuassembler">STD  t1, 100.0
+</code></pre></li>
+<li>
+<p>Andere Sprache:</p>
+<ul>
+<li>Bytecode</li>
+<li>C</li>
+<li>...</li>
+</ul>
+</li>
+</ul>
+<h2 id="probleme">Probleme</h2>
+<pre><code>5*4+3
+</code></pre>
+
+<a  class="btn btn-default">
+  
+  
+  
+  AST?
+  
+</a>
+
+<p>Problem: Vorrang von Operatoren</p>
+<ul>
+<li>Variante 1: <code>+(*(5, 4), 3)</code></li>
+<li>Variante 2: <code>*(5, +(4, 3))</code></li>
+</ul>
+<pre><code class="language-lex" data-lang="lex">stat : expr ';'
+     | ID '(' ')' ';'
+     ;
+expr : ID '(' ')'
+     | INT
+     ;
+</code></pre><h2 id="wrap-up">Wrap-Up</h2>
+<ul>
+<li>
+<p>Compiler übersetzen Text in ein anderes Format</p>
+</li>
+<li>
+<p>Typische Phasen:</p>
+<ol>
+<li>Lexikalische Analyse</li>
+<li>Syntaxanalyse</li>
+<li>Semantische Analyse</li>
+<li>Generierung von Zwischencode</li>
+<li>Optimierung des (Zwischen-) Codes</li>
+<li>Codegenerierung</li>
+</ol>
+</li>
+</ul>
+
+    
+
+
+
+    
+
+
+
+
+    
+
+
+
+<div class="bib">
+    <h2>Literatur</h2>
+    <ul>
+    
+        
+        
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            <li id="id_Aho2008">
+            
+                [Aho2008] <strong>Compiler: Prinzipien, techniken und werkzeuge</strong>
+            
+            
+                <br>Aho, A. V. und Lam, M. S. und Sethi, R. und Ullman, J. D., Pearson Studium, 2008.
+                
+                    ISBN <a href="https://www.digibib.net/openurl/Bi10?isbn=978-3-8273-7097-6" target="_blank" rel="nofollow noopener noreferrer">978-3-8273-7097-6</a>.
+                
+                
+            
+            
+                <br><em>Kapitel 1 Introduction</em>
+            
+            </li>
+        
+    
+        
+        
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            <li id="id_Grune2012">
+            
+                [Grune2012] <strong>Modern compiler design</strong>
+            
+            
+                <br>Grune, D. und van, Reeuwijk, K. und Bal, H. E. und Jacobs, C. J. H. und Langendoen, K., Springer, 2012.
+                
+                    ISBN <a href="https://www.digibib.net/openurl/Bi10?isbn=978-1-4614-4698-9" target="_blank" rel="nofollow noopener noreferrer">978-1-4614-4698-9</a>.
+                
+                
+            
+            
+                <br><em>Kapitel 1 Introduction</em>
+            
+            </li>
+        
+    
+    </ul>
+</div>
+
+
+
+
+
+        
+        </div>
+        <p><div style="color: darkgray; font-size: smaller;">
+<p>
+    <!-- https://creativecommons.org/choose/ -->
+    <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a> Unless otherwise noted, <a href="https://github.com/Compilerbau/Lecture">this work</a> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/bcg7" property="cc:attributionName" rel="cc:attributionURL">BC George</a>, <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/cagix" property="cc:attributionName" rel="cc:attributionURL">Carsten Gips</a>, and <a href="https://github.com/Compilerbau/Lecture/graphs/contributors">contributors</a> is licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.
+<br />
+    Icons by <a href="https://fontawesome.com/">Font Awesome</a>.
+    Built with <a href="https://github.com/jgm/pandoc">Pandoc</a> using <a href="https://github.com/cagix/pandoc-lecture">Pandoc-Lecture</a> and <a href="https://github.com/gohugoio/hugo">Hugo</a> using the <a href="https://github.com/matcornic/hugo-theme-learn">Hugo Learn Theme</a> (deriving from <a href="https://github.com/getgrav/grav">Grav</a>).
+</p>
+</div>
+</p>
+
+      </div>
+
+    <div id="navigation">
+        
+        
+
+        
+            
+            
+        
+
+        
+
+
+	 
+	 
+    </div>
+
+    </section>
+
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/clipboard.min.js?1633278362"></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/perfect-scrollbar.min.js?1633278362"></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/perfect-scrollbar.jquery.min.js?1633278362"></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/jquery.sticky.js?1633278362"></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/featherlight.min.js?1633278362"></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/highlight.pack.js?1633278362"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/modernizr.custom-3.6.0.js?1633278362"></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/learn.js?1633278362"></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1165993/js/hugo-learn.js?1633278362"></script>
+    
+    
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+</script>
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  </body>
+</html>
+

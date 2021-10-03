@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Organisatorisches on </title>
+    <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/misc/</link>
+    <description>Recent content in Organisatorisches on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>de-DE</language><atom:link href="https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/misc/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Credits</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/misc/credits/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/misc/credits/</guid>
+      <description>Beim Generieren der Vortrags-Folien und der Webseiten für das Unterrichtsmaterial kommen einige externe Projekte zum Einsatz, die unter eigenen Lizenzen stehen und die nicht von der CC BY-SA 4.0 Lizenz dieses Projekts erfasst sind.
+Erzeugen der Folien Für das Erzeugen der Vortrags-Folien kommen u.a. folgende Projekte zum Einsatz:
+ Pandoc Pandoc-Lecture TeX Live Beamer Metropolis  Erzeugen der Webseiten Für die Vorverarbeitung des Materials werden die beiden Projekte eingesetzt:
+ Pandoc Pandoc-Lecture  Die Webseiten für das Unterrichtsmaterial werden mit folgenden Projekten erzeugt:</description>
+    </item>
+    
+    <item>
+      <title>Datenschutzerklärung</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/misc/privacy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/misc/privacy/</guid>
+      <description>Hinweise zum Datenschutz: Cookies, Informationen, &amp;hellip; (TODO: zu klären mit ORCA-Team)</description>
+    </item>
+    
+    <item>
+      <title>Fahrplan</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/misc/schedule/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/misc/schedule/</guid>
+      <description>Woche Vorlesung Praktikum/Übung Verschiedenes      1 (KW40)     MISC &amp;gt; Syllabus (BC, cagi) Hinweis: Kick-Off (Zoom)   INTRO &amp;gt; Struktur eines Compilers (cagi)   INTRO &amp;gt; Programmiersprachen (cagi)   INTRO &amp;gt; Anwendungen (cagi)            2 (KW41)     LEXING &amp;gt; Reguläre Sprachen (BC)   LEXING &amp;gt; Lexer: Implementierungen (cagi)   LEXING &amp;gt; Flex: Lexer generieren (cagi)      zweiter Teil der VL in Praktikumszeit</description>
+    </item>
+    
+    <item>
+      <title>Impressum</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/misc/imprint/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/misc/imprint/</guid>
+      <description>Hier kommt ein Impressum hin (TODO: zu klären mit ORCA-Team)</description>
+    </item>
+    
+    <item>
+      <title>Note und Credits</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/misc/grading/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/misc/grading/</guid>
+      <description>Prüfungsform: Parcours-Prüfung, 5 ECTS  Stationen 1-5: Erfolgreiche Bearbeitung der Aufgabenblätter Station 6+7: Mündliche Prüfung mit je 30 Minuten Dauer Station 8: Vortrag mit 45 Minuten Dauer   Gesamtnote: Mittelwert(mdl. Prüfung I, mdl. Prüfung II, Vortrag)  Parcours-Prüfung: Was ist das? Sie legen die Prüfung in mehreren Stationen zurück und sammeln jeweils Teilnoten, die gemittelt in eine Gesamtnote für das Modul münden.
+Um eine Note und die Credit-Points zu erhalten, müssen Sie sich (wie bei allen anderen Prüfungen) für die Gesamtprüfung im LSF anmelden.</description>
+    </item>
+    
+    <item>
+      <title>Ressourcen</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/misc/resources/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/misc/resources/</guid>
+      <description>Was brauche ich? Literatur ... Basics (&amp;quot;Must Have&amp;quot;!)  &amp;quot;Compiler: Prinzipien, Techniken und Werkzeuge&amp;quot;: [Aho2008] &amp;quot;Crafting Interpreters&amp;quot;: [Nystrom2021]  Weitere empfohlene Literatur Ergänzend zum [Aho2008] empfiehlt sich ein Blick in [Mogensen2017] und [Watson2017], wo ebenfalls beinahe alle Themen (auf etwas einfacherem Niveau) besprochen werden.
+Zur Vertiefung sei [Grune2012] als eine moderne Variante zum Drachenbuch empfohlen. Ebenfalls sehr interessant ist [Torczon2012], wobei hier der Fokus allerdings sehr stark auf dem Backend liegt.</description>
+    </item>
+    
+    <item>
+      <title>Syllabus</title>
+      <link>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/misc/syllabus/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.fh-bielefeld.de/elearning/data/FH-Bielefeld/lm_data/lm_1165993/misc/syllabus/</guid>
+      <description>Worum geht&amp;rsquo;s hier?  Verständnis für die wichtigsten Konzepte im Compilerbau Kenntnis relevanter aktueller Tools/Frameworks Verständnis für wichtige Sprachparadigmen  =&amp;gt; Aufteilung: 40% Konzepte/Theorie, 60% Anwendung
+Überblick Modulinhalte  Lexikalische Analyse: Scanner/Lexer  Reguläre Ausdrücke Klassisches Vorgehen: RegExp nach NFA (Thompson&amp;rsquo;s Construction), NFA nach DFA (Subset Construction), DFA nach Minimal DFA (Hopcroft&amp;rsquo;s Algorithm) Manuelle Implementierung, Look-Ahead Generierung mit ANTLR und Flex Error Recovery     Syntaxanalyse: Parser  Kontextfreie Grammatiken (CFG), Chomsky LL-Parser (Top-Down-Parser)  FIRST, FOLLOW Tabellenbasierte Verfahren Rekursiver Abstieg LL(1), LL(k), LL(*) Umgang mit linksrekursiven Grammatiken Umgang mit Vorrang-Regeln und Assoziativität Backtracking, Memoizing, Predicated Parsers; ANTLR4: ALL(*)   LR-Parser (Bottom-Up-Parser)  Shift-Reduce LR(0), SLR(1), LR(1), LALR(1)   Generierung mit ANTLR und Bison Error Recovery Grenze Lexer und Parser (aus praktischen Gesichtspunkten)     Symboltabellen  Berücksichtigung unterschiedlicher Sprachparadigmen Typen, Klassen, Polymorphie Namen und Scopes     Semantische Analyse und Optimierungen  Attributierte Grammatiken: L-attributed vs.</description>
+    </item>
+    
+  </channel>
+</rss>
